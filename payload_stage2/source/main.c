@@ -55,6 +55,8 @@ static void loadPayload(bool isNand)
         if(isNand) restoreShaHashBackup();
         flushEntireDCache();
         flushEntireICache();
+        //Set media type to be read later
+        *(vu32 *)(PAYLOAD_ADDRESS-4) = ((u32)isNand)+1;
         ((void (*)())PAYLOAD_ADDRESS)();
     }
 }
